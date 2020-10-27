@@ -12,6 +12,7 @@ import top.liuyuexin.rpc.registry.ServiceRegistry;
  * 测试Netty服务提供者（服务端）
  */
 public class NettyTestServer {
+
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl();
         ServiceRegistry registry = new DefaultServiceRegistry();
@@ -19,4 +20,5 @@ public class NettyTestServer {
         NettyServer server = new NettyServer();
         server.start(9999);
     }
+
 }

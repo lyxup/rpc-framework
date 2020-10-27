@@ -14,7 +14,6 @@ import top.liuyuexin.rpc.codec.CommonDecoder;
 import top.liuyuexin.rpc.codec.CommonEncoder;
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.entity.RpcResponse;
-import top.liuyuexin.rpc.serializer.JsonSerializer;
 import top.liuyuexin.rpc.serializer.KryoSerializer;
 
 /**
@@ -79,4 +78,5 @@ public class NettyClient implements RpcClient {
         }
         return null;
     }
+
 }

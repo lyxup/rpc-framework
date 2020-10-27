@@ -7,6 +7,8 @@ import lombok.Getter;
 /**
  * @Author LiuYueXin
  * @data 2020/9/15 12:41
+ *
+ * RPC调用过程中的错误
  */
 @AllArgsConstructor
 @Getter
@@ -21,4 +23,5 @@ public enum RpcError {
     UNKNOWN_PACKAGE_TYPE("不识别的数据报类型");
 
     private final String message;
+
 }

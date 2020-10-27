@@ -7,7 +7,6 @@ import lombok.Getter;
  * @Author LiuYueXin
  * @data 2020/9/17 10:41
  */
-
 @AllArgsConstructor
 @Getter
 public enum PackageType {
@@ -16,4 +15,5 @@ public enum PackageType {
     RESPONSE_PACK(1);
 
     private final int code;
+
 }

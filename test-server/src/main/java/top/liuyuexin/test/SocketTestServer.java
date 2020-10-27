@@ -19,4 +19,5 @@ public class SocketTestServer {
         SocketServer socketServer = new SocketServer(serviceRegistry);
         socketServer.start(9000);
     }
+
 }

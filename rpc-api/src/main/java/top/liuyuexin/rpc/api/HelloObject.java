@@ -9,6 +9,8 @@ import java.io.Serializable;
 /**
  * @Author LiuYueXin
  * @data 2020/9/13 20:39
+ *
+ * 测试调用的api实体
  */
 
 @Data
@@ -18,4 +20,5 @@ public class HelloObject implements Serializable {
 
     private Integer id;
     private String message;
+
 }

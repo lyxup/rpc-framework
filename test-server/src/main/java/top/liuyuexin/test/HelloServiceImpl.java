@@ -10,7 +10,6 @@ import top.liuyuexin.rpc.api.HelloService;
  * @Author LiuYueXin
  * @data 2020/9/13 20:41
  */
-
 public class HelloServiceImpl implements HelloService {
 
     private static final Logger logger = LoggerFactory.getLogger(HelloServiceImpl.class);

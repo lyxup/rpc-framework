@@ -10,7 +10,6 @@ import lombok.Getter;
  *
  * 方法调用的响应状态码
  */
-
 @AllArgsConstructor
 @Getter
 public enum ResponseCode {
@@ -22,4 +21,5 @@ public enum ResponseCode {
 
     private final int code;
     private final String message;
+
 }

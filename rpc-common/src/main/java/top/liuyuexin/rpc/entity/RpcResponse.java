@@ -1,7 +1,6 @@
 package top.liuyuexin.rpc.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import top.liuyuexin.rpc.enumeration.ResponseCode;
 
 import java.io.Serializable;
@@ -9,12 +8,11 @@ import java.io.Serializable;
 /**
  * @Author LiuYueXin
  * @data 2020/9/13 22:31
+ *
+ * 提供者执行完成或出错后向消费者返回的结果对象
  */
-
 @Data
 public class RpcResponse<T> implements Serializable {
-
-    public RpcResponse() {}
 
     /**
      *响应状态码
@@ -31,6 +29,9 @@ public class RpcResponse<T> implements Serializable {
      */
     private T data;
 
+    public RpcResponse() {
+    }
+
     public static <T> RpcResponse<T> success(T data){
         RpcResponse<T> response = new RpcResponse<>();
         response.setStatusCode(ResponseCode.SUCCESS.getCode());
@@ -44,4 +45,5 @@ public class RpcResponse<T> implements Serializable {
         response.setMessage(code.getMessage());
         return response;
     }
+
 }

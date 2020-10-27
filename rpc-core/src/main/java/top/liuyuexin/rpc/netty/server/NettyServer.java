@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import top.liuyuexin.rpc.RpcServer;
 import top.liuyuexin.rpc.codec.CommonDecoder;
 import top.liuyuexin.rpc.codec.CommonEncoder;
-import top.liuyuexin.rpc.serializer.JsonSerializer;
 import top.liuyuexin.rpc.serializer.KryoSerializer;
 
 /**

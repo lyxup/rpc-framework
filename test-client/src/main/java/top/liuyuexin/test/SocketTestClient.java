@@ -21,4 +21,5 @@ public class SocketTestClient {
         String res = helloService.hello(object);
         System.out.println(res);
     }
+
 }
