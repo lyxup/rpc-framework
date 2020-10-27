@@ -3,6 +3,7 @@ package top.liuyuexin.test;
 import top.liuyuexin.rpc.api.HelloObject;
 import top.liuyuexin.rpc.api.HelloService;
 import top.liuyuexin.rpc.RpcClientProxy;
+import top.liuyuexin.rpc.serializer.KryoSerializer;
 import top.liuyuexin.rpc.socket.client.SocketClient;
 
 /**
@@ -15,6 +16,7 @@ public class SocketTestClient {
 
     public static void main(String[] args) {
         SocketClient client = new SocketClient("127.0.0.1", 9000);
+        client.setSerializer(new KryoSerializer());
         RpcClientProxy proxy = new RpcClientProxy(client);
         HelloService helloService = proxy.getProxy(HelloService.class);
         HelloObject object = new HelloObject(12, "This is a message");

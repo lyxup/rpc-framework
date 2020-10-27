@@ -2,6 +2,7 @@ package top.liuyuexin.test;
 
 import top.liuyuexin.rpc.registry.DefaultServiceRegistry;
 import top.liuyuexin.rpc.registry.ServiceRegistry;
+import top.liuyuexin.rpc.serializer.KryoSerializer;
 import top.liuyuexin.rpc.socket.server.SocketServer;
 
 /**
@@ -17,6 +18,7 @@ public class SocketTestServer {
         ServiceRegistry serviceRegistry = new DefaultServiceRegistry();
         serviceRegistry.register(helloService);
         SocketServer socketServer = new SocketServer(serviceRegistry);
+        socketServer.setSerializer(new KryoSerializer());
         socketServer.start(9000);
     }
 

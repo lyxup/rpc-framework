@@ -1,6 +1,7 @@
 package top.liuyuexin.rpc;
 
 import top.liuyuexin.rpc.entity.RpcRequest;
+import top.liuyuexin.rpc.serializer.CommonSerializer;
 
 /**
  * @Author LiuYueXin
@@ -11,5 +12,7 @@ import top.liuyuexin.rpc.entity.RpcRequest;
 public interface RpcClient {
 
     Object sendRequest(RpcRequest rpcRequest);
+
+    void setSerializer(CommonSerializer serializer);
 
 }
