@@ -1,4 +1,4 @@
-package top.liuyuexin.rpc.socket;
+package top.liuyuexin.rpc.socket.server;
 
 
 import org.slf4j.Logger;
@@ -41,7 +41,7 @@ public class RequestHandlerThread implements Runnable {
             String interfaceName = rpcRequest.getInterfaceName();
             Object service = serviceRegistry.getService(interfaceName);
             Object result = requestHandler.handle(rpcRequest, service);
-            RpcResponse<Object> response = RpcResponse.success(result);
+            RpcResponse<Object> response = RpcResponse.success(result, rpcRequest.getRequestId());
             ObjectWriter.writeObject(outputStream, response, serializer);
         } catch (IOException e) {
             logger.error("调用或发送时有错误发生：", e);

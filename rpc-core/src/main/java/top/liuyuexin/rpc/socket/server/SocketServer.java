@@ -15,7 +15,6 @@ package top.liuyuexin.rpc.socket.server;
         import top.liuyuexin.rpc.exception.RpcException;
         import top.liuyuexin.rpc.registry.ServiceRegistry;
         import top.liuyuexin.rpc.serializer.CommonSerializer;
-        import top.liuyuexin.rpc.socket.RequestHandlerThread;
 
         import java.io.IOException;
         import java.net.ServerSocket;

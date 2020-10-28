@@ -12,6 +12,7 @@ import top.liuyuexin.rpc.serializer.CommonSerializer;
 import top.liuyuexin.rpc.serializer.CommonSerializer;
 import top.liuyuexin.rpc.socket.util.ObjectReader;
 import top.liuyuexin.rpc.socket.util.ObjectWriter;
+import top.liuyuexin.rpc.util.RpcMessageChecker;
 
 import java.io.*;
 import java.net.Socket;
@@ -56,6 +57,7 @@ public class SocketClient implements RpcClient {
                 logger.error("调用服务失败, service: {}, response:{}", rpcRequest.getInterfaceName(), rpcResponse);
                 throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, " service:" + rpcRequest.getInterfaceName());
             }
+            RpcMessageChecker.check(rpcRequest, rpcResponse);
             return rpcResponse.getData();
         } catch (IOException e) {
             logger.error("调用时有错误发生：", e);
