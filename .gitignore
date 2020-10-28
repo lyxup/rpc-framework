@@ -1,35 +1,36 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
 
-# Folder config file
-Desktop.ini
+.idea/
 
-# java class file
-*.class
-
-# Package Files #
-*.war
-*.ear
-/target
-/.settings
-/.classpath
-/.project
-/.idea
-
-# ignore Maven generated target folders
-target
-out
-
-# ignore eclipse files
-.project
-.classpath
-.settings
-.factorypath
-.metadata
-.idea
+## File-based project format:
+*.iws
 *.iml
+*.ipr
 
-# ignore log files
-*.log
+## Plugin-specific files:
 
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+.DS_Store 
