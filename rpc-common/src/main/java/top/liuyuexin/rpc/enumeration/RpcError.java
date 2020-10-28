@@ -14,6 +14,7 @@ import lombok.Getter;
 @Getter
 public enum RpcError {
 
+    CLIENT_CONNECT_SERVER_FAILURE("客户端连接服务端失败"),
     SERVICE_INVOCATION_FAILURE("服务调用出现失败"),
     SERVICE_CAN_NOT_BE_NULL("注册服务不得为空"),
     SERVICE_NOT_FOUND("找不到对应服务"),
