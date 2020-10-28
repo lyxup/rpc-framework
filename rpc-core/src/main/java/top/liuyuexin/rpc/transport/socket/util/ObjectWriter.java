@@ -1,4 +1,4 @@
-package top.liuyuexin.rpc.socket.util;
+package top.liuyuexin.rpc.transport.socket.util;
 
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.enumeration.PackageType;

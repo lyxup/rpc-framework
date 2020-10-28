@@ -1,23 +1,20 @@
-package top.liuyuexin.rpc.netty.client;
+package top.liuyuexin.rpc.transport.netty.client;
 
-import com.esotericsoftware.kryo.Kryo;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import top.liuyuexin.rpc.RpcClient;
-import top.liuyuexin.rpc.codec.CommonDecoder;
-import top.liuyuexin.rpc.codec.CommonEncoder;
+import top.liuyuexin.rpc.registry.NacosServiceRegistry;
+import top.liuyuexin.rpc.registry.ServiceRegistry;
+import top.liuyuexin.rpc.transport.RpcClient;
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.entity.RpcResponse;
 import top.liuyuexin.rpc.enumeration.RpcError;
 import top.liuyuexin.rpc.exception.RpcException;
 import top.liuyuexin.rpc.serializer.CommonSerializer;
-import top.liuyuexin.rpc.serializer.KryoSerializer;
 import top.liuyuexin.rpc.util.RpcMessageChecker;
 
 import java.net.InetSocketAddress;
@@ -32,17 +29,10 @@ import java.util.concurrent.atomic.AtomicReference;
 public class NettyClient implements RpcClient {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
-
-    private String host;
-    private int port;
     private static final Bootstrap bootstrap;
+    private final ServiceRegistry serviceRegistry;
 
     private CommonSerializer serializer;
-
-    public NettyClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
 
     static {
         EventLoopGroup group = new NioEventLoopGroup();
@@ -50,6 +40,10 @@ public class NettyClient implements RpcClient {
         bootstrap.group(group)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.ALLOCATOR.SO_KEEPALIVE, true);
+    }
+
+    public NettyClient(){
+        this.serviceRegistry = new NacosServiceRegistry();
     }
 
     @Override
@@ -67,7 +61,8 @@ public class NettyClient implements RpcClient {
         AtomicReference<Object> result = new AtomicReference<>(null);
 
         try {
-            Channel channel = ChannelProvider.get(new InetSocketAddress(host, port), serializer);
+            InetSocketAddress inetSocketAddress = serviceRegistry.lookupService(rpcRequest.getInterfaceName());
+            Channel channel = ChannelProvider.get(inetSocketAddress, serializer);
             if(channel.isActive()) {
                 channel.writeAndFlush(rpcRequest).addListener(future1 -> {
                     if(future1.isSuccess()) {

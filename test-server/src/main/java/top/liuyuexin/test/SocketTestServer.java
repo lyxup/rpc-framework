@@ -1,9 +1,8 @@
 package top.liuyuexin.test;
 
-import top.liuyuexin.rpc.registry.DefaultServiceRegistry;
-import top.liuyuexin.rpc.registry.ServiceRegistry;
+import top.liuyuexin.rpc.api.HelloService;
 import top.liuyuexin.rpc.serializer.KryoSerializer;
-import top.liuyuexin.rpc.socket.server.SocketServer;
+import top.liuyuexin.rpc.transport.socket.server.SocketServer;
 
 /**
  * @Author LiuYueXin
@@ -15,11 +14,9 @@ public class SocketTestServer {
 
     public static void main(String[] args) {
         HelloServiceImpl helloService = new HelloServiceImpl();
-        ServiceRegistry serviceRegistry = new DefaultServiceRegistry();
-        serviceRegistry.register(helloService);
-        SocketServer socketServer = new SocketServer(serviceRegistry);
+        SocketServer socketServer = new SocketServer("127.0.0.1", 9998);
         socketServer.setSerializer(new KryoSerializer());
-        socketServer.start(9999);
+        socketServer.publishService(helloService, HelloService.class);
     }
 
 }

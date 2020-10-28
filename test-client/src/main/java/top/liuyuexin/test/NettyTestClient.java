@@ -1,11 +1,10 @@
 package top.liuyuexin.test;
 
-import top.liuyuexin.rpc.RpcClient;
-import top.liuyuexin.rpc.RpcClientProxy;
+import top.liuyuexin.rpc.transport.RpcClient;
+import top.liuyuexin.rpc.transport.RpcClientProxy;
 import top.liuyuexin.rpc.api.HelloObject;
 import top.liuyuexin.rpc.api.HelloService;
-import top.liuyuexin.rpc.netty.client.NettyClient;
-import top.liuyuexin.rpc.serializer.KryoSerializer;
+import top.liuyuexin.rpc.transport.netty.client.NettyClient;
 import top.liuyuexin.rpc.serializer.ProtobufSerializer;
 
 /**
@@ -17,7 +16,7 @@ import top.liuyuexin.rpc.serializer.ProtobufSerializer;
 public class NettyTestClient {
 
     public static void main(String[] args) {
-        RpcClient client = new NettyClient("127.0.0.1", 9999);
+        RpcClient client = new NettyClient();
         client.setSerializer(new ProtobufSerializer());
         RpcClientProxy rpcClientProxy = new RpcClientProxy(client);
         HelloService helloService = rpcClientProxy.getProxy(HelloService.class);

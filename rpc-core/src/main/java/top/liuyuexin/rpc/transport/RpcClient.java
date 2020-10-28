@@ -1,4 +1,4 @@
-package top.liuyuexin.rpc;
+package top.liuyuexin.rpc.transport;
 
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.serializer.CommonSerializer;

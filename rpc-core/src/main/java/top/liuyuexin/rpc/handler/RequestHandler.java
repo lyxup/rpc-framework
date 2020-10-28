@@ -1,35 +1,44 @@
-package top.liuyuexin.rpc;
+package top.liuyuexin.rpc.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.entity.RpcResponse;
 import top.liuyuexin.rpc.enumeration.ResponseCode;
+import top.liuyuexin.rpc.provider.ServiceProvider;
+import top.liuyuexin.rpc.provider.ServiceProviderImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * @Author LiuYueXin
- * @data 2020/9/15 19:11
+ * @data 2020/10/28 16:37
  *
- * 通过反射方法进行调用
+ * 进行过程调用的处理器
  */
 public class RequestHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestHandler.class);
+    private static final ServiceProvider serviceProvider;
 
-    public Object handle(RpcRequest rpcRequest, Object service){
-        Object result = null;
-        try {
-            result = invokeTargetMethod(rpcRequest, service);
-            logger.info("服务：{}成功调用方法：{}", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            logger.error("调用或发送时有错误发生：", e);
-        } return result;
+    static {
+        serviceProvider = new ServiceProviderImpl();
     }
 
-    private Object invokeTargetMethod(RpcRequest rpcRequest, Object service) throws InvocationTargetException, IllegalAccessException {
+    public Object handle(RpcRequest rpcRequest) {
+        Object result = null;
+        Object service = serviceProvider.getServiceProvider(rpcRequest.getInterfaceName());
+        try {
+            result = invokeTargetMethod(rpcRequest, service);
+            logger.info("服务:{} 成功调用方法:{}", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            logger.error("调用或发送时有错误发生：", e);
+        }
+        return result;
+    }
+
+    private Object invokeTargetMethod(RpcRequest rpcRequest, Object service) throws IllegalAccessException, InvocationTargetException {
         Method method;
         try {
             method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParamTypes());
@@ -38,5 +47,6 @@ public class RequestHandler {
         }
         return method.invoke(service, rpcRequest.getParameters());
     }
+
 
 }

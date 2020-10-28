@@ -2,9 +2,9 @@ package top.liuyuexin.test;
 
 import top.liuyuexin.rpc.api.HelloObject;
 import top.liuyuexin.rpc.api.HelloService;
-import top.liuyuexin.rpc.RpcClientProxy;
+import top.liuyuexin.rpc.transport.RpcClientProxy;
 import top.liuyuexin.rpc.serializer.KryoSerializer;
-import top.liuyuexin.rpc.socket.client.SocketClient;
+import top.liuyuexin.rpc.transport.socket.client.SocketClient;
 
 /**
  * @Author LiuYueXin
@@ -15,7 +15,7 @@ import top.liuyuexin.rpc.socket.client.SocketClient;
 public class SocketTestClient {
 
     public static void main(String[] args) {
-        SocketClient client = new SocketClient("127.0.0.1", 9999);
+        SocketClient client = new SocketClient();
         client.setSerializer(new KryoSerializer());
         RpcClientProxy proxy = new RpcClientProxy(client);
         HelloService helloService = proxy.getProxy(HelloService.class);

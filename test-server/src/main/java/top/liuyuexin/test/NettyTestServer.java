@@ -1,10 +1,7 @@
 package top.liuyuexin.test;
 
 import top.liuyuexin.rpc.api.HelloService;
-import top.liuyuexin.rpc.netty.server.NettyServer;
-import top.liuyuexin.rpc.registry.DefaultServiceRegistry;
-import top.liuyuexin.rpc.registry.ServiceRegistry;
-import top.liuyuexin.rpc.serializer.KryoSerializer;
+import top.liuyuexin.rpc.transport.netty.server.NettyServer;
 import top.liuyuexin.rpc.serializer.ProtobufSerializer;
 
 /**
@@ -17,11 +14,9 @@ public class NettyTestServer {
 
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl();
-        ServiceRegistry registry = new DefaultServiceRegistry();
-        registry.register(helloService);
-        NettyServer server = new NettyServer();
+        NettyServer server = new NettyServer("127.0.0.1", 9999);
         server.setSerializer(new ProtobufSerializer());
-        server.start(9999);
+        server.publishService(helloService, HelloService.class);
     }
 
 }

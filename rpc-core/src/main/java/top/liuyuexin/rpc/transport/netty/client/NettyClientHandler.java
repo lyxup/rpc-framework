@@ -1,4 +1,4 @@
-package top.liuyuexin.rpc.netty.client;
+package top.liuyuexin.rpc.transport.netty.client;
 
         import io.netty.channel.ChannelHandlerContext;
         import io.netty.channel.SimpleChannelInboundHandler;
