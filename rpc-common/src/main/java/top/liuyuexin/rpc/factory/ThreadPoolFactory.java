@@ -1,4 +1,4 @@
-package top.liuyuexin.rpc.util;
+package top.liuyuexin.rpc.factory;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

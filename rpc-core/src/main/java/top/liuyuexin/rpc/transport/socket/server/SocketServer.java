@@ -10,6 +10,7 @@ package top.liuyuexin.rpc.transport.socket.server;
         import org.slf4j.Logger;
         import org.slf4j.LoggerFactory;
         import top.liuyuexin.rpc.handler.RequestHandler;
+        import top.liuyuexin.rpc.hook.ShutdownHook;
         import top.liuyuexin.rpc.provider.ServiceProvider;
         import top.liuyuexin.rpc.provider.ServiceProviderImpl;
         import top.liuyuexin.rpc.registry.NacosServiceRegistry;
@@ -18,7 +19,7 @@ package top.liuyuexin.rpc.transport.socket.server;
         import top.liuyuexin.rpc.exception.RpcException;
         import top.liuyuexin.rpc.registry.ServiceRegistry;
         import top.liuyuexin.rpc.serializer.CommonSerializer;
-        import top.liuyuexin.rpc.util.ThreadPoolFactory;
+        import top.liuyuexin.rpc.factory.ThreadPoolFactory;
 
         import java.io.IOException;
         import java.net.InetSocketAddress;
@@ -62,12 +63,14 @@ public class SocketServer implements RpcServer {
 
     @Override
     public void start() {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
+        try (ServerSocket serverSocket = new ServerSocket()) {
+            serverSocket.bind(new InetSocketAddress(host, port));
             logger.info("服务器启动……");
+            ShutdownHook.getShutdownHook().addClearAllHook();
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("消费者连接: {}:{}", socket.getInetAddress(), socket.getPort());
-                threadPool.execute(new RequestHandlerThread(socket, requestHandler, serviceRegistry, serializer));
+                threadPool.execute(new SocketRequestHandlerThread(socket, requestHandler, serializer));
             }
             threadPool.shutdown();
         } catch (IOException e) {
