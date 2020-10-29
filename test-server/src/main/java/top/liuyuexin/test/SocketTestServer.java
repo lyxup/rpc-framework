@@ -1,7 +1,7 @@
 package top.liuyuexin.test;
 
 import top.liuyuexin.rpc.api.HelloService;
-import top.liuyuexin.rpc.serializer.KryoSerializer;
+import top.liuyuexin.rpc.serializer.CommonSerializer;
 import top.liuyuexin.rpc.transport.socket.server.SocketServer;
 
 /**
@@ -13,9 +13,8 @@ import top.liuyuexin.rpc.transport.socket.server.SocketServer;
 public class SocketTestServer {
 
     public static void main(String[] args) {
-        HelloServiceImpl helloService = new HelloServiceImpl();
-        SocketServer socketServer = new SocketServer("127.0.0.1", 9998);
-        socketServer.setSerializer(new KryoSerializer());
+        HelloService helloService = new HelloServiceImpl2();
+        SocketServer socketServer = new SocketServer("127.0.0.1", 9998, CommonSerializer.HESSIAN_SERALIZER);
         socketServer.publishService(helloService, HelloService.class);
     }
 

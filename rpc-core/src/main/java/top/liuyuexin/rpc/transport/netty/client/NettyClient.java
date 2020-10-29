@@ -42,26 +42,24 @@ public class NettyClient implements RpcClient {
     }
 
     private final ServiceDiscovery serviceDiscovery;
-    private CommonSerializer serializer;
+    private final CommonSerializer serializer;
 
     public NettyClient(){
-        this.serviceDiscovery = new NacosServiceDiscovery();
+        this(DEFAULT_SERIALIZER);
     }
 
-    @Override
-    public void setSerializer(CommonSerializer serializer) {
-        this.serializer = serializer;
+    public NettyClient(Integer serializer) {
+        this.serviceDiscovery = new NacosServiceDiscovery();
+        this.serializer = CommonSerializer.getByCode(serializer);
     }
 
     @Override
     public Object sendRequest(RpcRequest rpcRequest) {
-
-        if(serializer == null) {
+        if (serializer == null) {
             logger.error("未设置序列化器");
             throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
         }
         AtomicReference<Object> result = new AtomicReference<>(null);
-
         try {
             InetSocketAddress inetSocketAddress = serviceDiscovery.lookupService(rpcRequest.getInterfaceName());
             Channel channel = ChannelProvider.get(inetSocketAddress, serializer);

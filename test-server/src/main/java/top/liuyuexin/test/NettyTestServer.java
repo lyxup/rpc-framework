@@ -1,6 +1,7 @@
 package top.liuyuexin.test;
 
 import top.liuyuexin.rpc.api.HelloService;
+import top.liuyuexin.rpc.serializer.CommonSerializer;
 import top.liuyuexin.rpc.transport.netty.server.NettyServer;
 import top.liuyuexin.rpc.serializer.ProtobufSerializer;
 
@@ -14,8 +15,7 @@ public class NettyTestServer {
 
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl2();
-        NettyServer server = new NettyServer("127.0.0.1", 9999);
-        server.setSerializer(new ProtobufSerializer());
+        NettyServer server = new NettyServer("127.0.0.1", 9999, CommonSerializer.PROTOBUF_SERIALIZER);
         server.publishService(helloService, HelloService.class);
     }
 
