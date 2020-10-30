@@ -3,9 +3,7 @@ package top.liuyuexin.rpc.transport.socket.client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.liuyuexin.rpc.registry.NacosServiceDiscovery;
-import top.liuyuexin.rpc.registry.NacosServiceRegistry;
 import top.liuyuexin.rpc.registry.ServiceDiscovery;
-import top.liuyuexin.rpc.registry.ServiceRegistry;
 import top.liuyuexin.rpc.transport.RpcClient;
 import top.liuyuexin.rpc.entity.RpcRequest;
 import top.liuyuexin.rpc.entity.RpcResponse;
@@ -17,7 +15,9 @@ import top.liuyuexin.rpc.transport.socket.util.ObjectReader;
 import top.liuyuexin.rpc.transport.socket.util.ObjectWriter;
 import top.liuyuexin.rpc.util.RpcMessageChecker;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -67,7 +67,7 @@ public class SocketClient implements RpcClient {
                 throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, " service:" + rpcRequest.getInterfaceName());
             }
             RpcMessageChecker.check(rpcRequest, rpcResponse);
-            return rpcResponse.getData();
+            return rpcResponse;
         } catch (IOException e) {
             logger.error("调用时有错误发生：", e);
             throw new RpcException("服务调用失败: ", e);
