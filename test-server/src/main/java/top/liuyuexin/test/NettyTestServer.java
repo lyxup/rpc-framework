@@ -3,7 +3,6 @@ package top.liuyuexin.test;
 import top.liuyuexin.rpc.api.HelloService;
 import top.liuyuexin.rpc.serializer.CommonSerializer;
 import top.liuyuexin.rpc.transport.netty.server.NettyServer;
-import top.liuyuexin.rpc.serializer.ProtobufSerializer;
 
 /**
  * @Author LiuYueXin

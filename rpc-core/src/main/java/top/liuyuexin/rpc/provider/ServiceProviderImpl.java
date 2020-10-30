@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.liuyuexin.rpc.enumeration.RpcError;
 import top.liuyuexin.rpc.exception.RpcException;
-import top.liuyuexin.rpc.registry.ServiceRegistry;
 
 import java.util.Map;
 import java.util.Set;
