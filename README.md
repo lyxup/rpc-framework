@@ -5,7 +5,8 @@
 RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法就像调用本地方法一样简单。rpc-framework是一款基于Netty+Kryo+Nacos实现的RPC框架。网络传输实现了基于Java原生Socket与Netty版本，并实现了多种序列化方式和负载均衡算法。
 
 ## 架构
-一个简单的RPC框架的设计思路：![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure.png)
+一个简单的RPC框架的设计思路：<br>
+![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure.png)<br>
 服务提供端Server向注册中心注册服务，服务消费者Client通过注册中心拿到服务相关信息，然后再通过网络请求服务端提供Server。
 
 通常情况下，RPC框架不仅要提供服务发现功能，还要提供负载均衡等功能。![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure-detail.png)
