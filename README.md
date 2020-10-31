@@ -5,14 +5,12 @@
 RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法就像调用本地方法一样简单。rpc-framework是一款基于Netty+Kryo+Nacos实现的RPC框架。网络传输实现了基于Java原生Socket与Netty版本，并实现了多种序列化方式和负载均衡算法。
 
 ## 架构
-一个简单的RPC框架的设计思路：<br>
-![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure.png)<br>
+一个简单的RPC框架的设计思路：![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure.png)
 服务提供端Server向注册中心注册服务，服务消费者Client通过注册中心拿到服务相关信息，然后再通过网络请求服务端提供Server。
 
 通常情况下，RPC框架不仅要提供服务发现功能，还要提供负载均衡等功能。![image](https://github.com/lyxup/rpc-framework/blob/master/images/rpc-architure-detail.png)
 
 ## 特性
-
 - 实现了基于 Java 原生 Socket 传输与 Netty 传输两种网络传输方式
 - 实现了四种序列化算法，Json 方式、Kryo 算法、Hessian 算法与 Google Protobuf 方式（默认采用 Kryo方式序列化）
 - 实现了两种负载均衡算法：随机算法与轮转算法
@@ -23,7 +21,6 @@ RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法
 - 服务提供侧自动注册服务
 
 ## 项目模块
-
 - rpc-api：通用服务接口
 - rpc-common：存放一些实体对象，枚举类，工具类等
 - rpc-core：rpc框架的核心实现
@@ -43,7 +40,7 @@ RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法
 ```
 | 字段            | 解释                                                         |
 | :-------------- | :----------------------------------------------------------- |
-| Magic Number    | 魔数，表识一个 MRF 协议包，0xCAFEBABE                        |
+| Magic Number    | 魔数，表识一个 RF 协议包，0xCAFEBABE                        |
 | Package Type    | 包类型，标明这是一个调用请求还是调用响应                     |
 | Serializer Type | 序列化器类型，标明这个包的数据的序列化方式                   |
 | Data Length     | 数据字节的长度                                               |
@@ -51,6 +48,7 @@ RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法
 
 ## 运行项目
 项目启动前确保Nacos运行在本地8848端口。
+
 ### 定义调用接口
 ```java
 package top.liuyuexin.rpc.api;
