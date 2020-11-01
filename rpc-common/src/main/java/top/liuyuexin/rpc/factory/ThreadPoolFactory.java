@@ -11,10 +11,9 @@ import java.util.concurrent.*;
  * @Author LiuYueXin
  * @data 2020/10/27 15:48
  *
- * 创建ThreadPoll(线程池)的工具类
+ * 创建ThreadPool(线程池)的工具类
  */
 public class ThreadPoolFactory {
-
     /**
      * 线程池参数
      */
@@ -27,8 +26,7 @@ public class ThreadPoolFactory {
 
     private static Map<String, ExecutorService> threadPollsMap = new ConcurrentHashMap<>();
 
-    private ThreadPoolFactory(){
-    }
+    private ThreadPoolFactory(){}
 
     public static ExecutorService createDefaultThreadPool(String threadNamePrefix) {
         return createDefaultThreadPool(threadNamePrefix, false);
@@ -42,7 +40,6 @@ public class ThreadPoolFactory {
             threadPollsMap.put(threadNamePrefix, pool);
         }
         return pool;
-
     }
 
     public static void shutDownAll() {
@@ -66,9 +63,8 @@ public class ThreadPoolFactory {
         return new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.MINUTES, workQueue, threadFactory);
     }
 
-
     /**
-     * 创建 ThreadFactory 。如果threadNamePrefix不为空则使用自建ThreadFactory，否则使用defaultThreadFactory
+     * 创建 ThreadFactory。如果threadNamePrefix不为空则使用自建ThreadFactory，否则使用defaultThreadFactory
      *
      * @param threadNamePrefix 作为创建的线程名字的前缀
      * @param daemon           指定是否为 Daemon Thread(守护线程)
@@ -82,8 +78,6 @@ public class ThreadPoolFactory {
                 return new ThreadFactoryBuilder().setNameFormat(threadNamePrefix + "-%d").build();
             }
         }
-
         return Executors.defaultThreadFactory();
     }
-
 }

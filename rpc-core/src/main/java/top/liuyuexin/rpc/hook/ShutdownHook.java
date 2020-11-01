@@ -10,7 +10,6 @@ import top.liuyuexin.rpc.util.NacosUtil;
  * @data 2020/10/29 14:57
  */
 public class ShutdownHook {
-
     private static final Logger logger = LoggerFactory.getLogger(ShutdownHook.class);
 
     private static final ShutdownHook shutdownHook = new ShutdownHook();
@@ -26,5 +25,4 @@ public class ShutdownHook {
             ThreadPoolFactory.shutDownAll();
         }));
     }
-
 }

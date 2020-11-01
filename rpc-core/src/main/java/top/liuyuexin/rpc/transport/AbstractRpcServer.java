@@ -18,7 +18,6 @@ import java.util.Set;
  * @data 2020/10/30 14:53
  */
 public abstract class AbstractRpcServer implements RpcServer {
-
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected String host;
@@ -32,7 +31,7 @@ public abstract class AbstractRpcServer implements RpcServer {
         Class<?> startClass;
         try {
             startClass = Class.forName(mainClassName);
-            if(!startClass.isAnnotationPresent(ServiceScan.class)) {
+            if (!startClass.isAnnotationPresent(ServiceScan.class)) {
                 logger.error("启动类缺少 @ServiceScan 注解");
                 throw new RpcException(RpcError.SERVICE_SCAN_PACKAGE_NOT_FOUND);
             }
@@ -41,12 +40,12 @@ public abstract class AbstractRpcServer implements RpcServer {
             throw new RpcException(RpcError.UNKNOWN_ERROR);
         }
         String basePackage = startClass.getAnnotation(ServiceScan.class).value();
-        if("".equals(basePackage)) {
+        if ("".equals(basePackage)) {
             basePackage = mainClassName.substring(0, mainClassName.lastIndexOf("."));
         }
         Set<Class<?>> classSet = ReflectUtil.getClasses(basePackage);
         for(Class<?> clazz : classSet) {
-            if(clazz.isAnnotationPresent(Service.class)) {
+            if (clazz.isAnnotationPresent(Service.class)) {
                 String serviceName = clazz.getAnnotation(Service.class).name();
                 Object obj;
                 try {
@@ -55,7 +54,7 @@ public abstract class AbstractRpcServer implements RpcServer {
                     logger.error("创建 " + clazz + " 时有错误发生");
                     continue;
                 }
-                if("".equals(serviceName)) {
+                if ("".equals(serviceName)) {
                     Class<?>[] interfaces = clazz.getInterfaces();
                     for (Class<?> oneInterface: interfaces){
                         publishService(obj, oneInterface.getCanonicalName());
@@ -72,5 +71,4 @@ public abstract class AbstractRpcServer implements RpcServer {
         serviceProvider.addServiceProvider(service, serviceName);
         serviceRegistry.register(serviceName, new InetSocketAddress(host, port));
     }
-
 }

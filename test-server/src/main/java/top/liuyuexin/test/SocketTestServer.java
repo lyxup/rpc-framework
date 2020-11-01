@@ -13,10 +13,8 @@ import top.liuyuexin.rpc.transport.socket.server.SocketServer;
  */
 @ServiceScan
 public class SocketTestServer {
-
     public static void main(String[] args) {
         RpcServer server = new SocketServer("127.0.0.1", 9998, CommonSerializer.HESSIAN_SERALIZER);
         server.start();
     }
-
 }

@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
  * NIO方式服务提供者
  */
 public class NettyServer extends AbstractRpcServer {;
-
     private final CommonSerializer serializer;
 
     public NettyServer(String host, int port) {
@@ -74,5 +73,4 @@ public class NettyServer extends AbstractRpcServer {;
             workerGroup.shutdownGracefully();
         }
     }
-
 }

@@ -10,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @data 2020/10/30 13:56
  */
 public class UnprocessedRequests {
-
     private static ConcurrentHashMap<String, CompletableFuture<RpcResponse>> unprocessedResponseFutures = new ConcurrentHashMap<>();
 
     public void put(String requestId, CompletableFuture<RpcResponse> future) {
@@ -29,5 +28,4 @@ public class UnprocessedRequests {
             throw new IllegalStateException();
         }
     }
-
 }

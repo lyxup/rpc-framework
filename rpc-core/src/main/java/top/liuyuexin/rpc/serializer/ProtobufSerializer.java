@@ -17,8 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * 使用ProtoBuf的序列化器
  */
-public class ProtobufSerializer implements CommonSerializer{
-
+public class ProtobufSerializer implements CommonSerializer {
     private LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
     private Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<>();
 
@@ -63,5 +62,4 @@ public class ProtobufSerializer implements CommonSerializer{
         }
         return schema;
     }
-
 }

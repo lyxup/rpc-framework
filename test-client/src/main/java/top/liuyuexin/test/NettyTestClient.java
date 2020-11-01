@@ -15,7 +15,6 @@ import top.liuyuexin.rpc.transport.netty.client.NettyClient;
  * 测试Netty消费者
  */
 public class NettyTestClient {
-
     public static void main(String[] args) {
         RpcClient client = new NettyClient(CommonSerializer.PROTOBUF_SERIALIZER);
         RpcClientProxy rpcClientProxy = new RpcClientProxy(client);
@@ -26,5 +25,4 @@ public class NettyTestClient {
         ByeService byeService = rpcClientProxy.getProxy(ByeService.class);
         System.out.println(byeService.bye("Netty"));
     }
-
 }

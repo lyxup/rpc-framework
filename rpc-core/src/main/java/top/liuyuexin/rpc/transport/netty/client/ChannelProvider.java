@@ -23,7 +23,6 @@ import java.util.concurrent.*;
  * 用于获取Channel对象
  */
 public class ChannelProvider {
-
     private static final Logger logger = LoggerFactory.getLogger(ChannelProvider.class);
     private static EventLoopGroup eventLoopGroup;
     private static Bootstrap bootstrap = initializeBootstrap();
@@ -34,7 +33,7 @@ public class ChannelProvider {
         String key = inetSocketAddress.toString() + serializer.getCode();
         if (channels.containsKey(key)) {
             Channel channel = channels.get(key);
-            if(channels != null && channel.isActive()) {
+            if (channels != null && channel.isActive()) {
                 return channel;
             } else {
                 channels.remove(key);
@@ -88,5 +87,4 @@ public class ChannelProvider {
                 .option(ChannelOption.TCP_NODELAY, true);
         return bootstrap;
     }
-
 }

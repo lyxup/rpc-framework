@@ -15,8 +15,7 @@ import java.net.InetSocketAddress;
  *
  * Nacos服务注册中心
  */
-public class NacosServiceRegistry implements ServiceRegistry{
-
+public class NacosServiceRegistry implements ServiceRegistry {
     private static final Logger logger = LoggerFactory.getLogger(NacosServiceRegistry.class);
 
     @Override
@@ -28,5 +27,4 @@ public class NacosServiceRegistry implements ServiceRegistry{
             throw new RpcException(RpcError.REGISTER_SERVICE_FAILED);
         }
     }
-
 }

@@ -15,16 +15,13 @@ import top.liuyuexin.rpc.exception.RpcException;
  * 检查响应与请求
  */
 public class RpcMessageChecker {
-
-    public static final String INTERFACE_NAME = "interfaceName";
     private static final Logger logger = LoggerFactory.getLogger(RpcMessageChecker.class);
+    public static final String INTERFACE_NAME = "interfaceName";
 
-    private RpcMessageChecker(){
+    private RpcMessageChecker(){}
 
-    }
-
-    public static void check(RpcRequest rpcRequest, RpcResponse rpcResponse){
-        if(rpcResponse == null){
+    public static void check(RpcRequest rpcRequest, RpcResponse rpcResponse) {
+        if (rpcResponse == null) {
             logger.error("服务调用失败，serviceName：{}", rpcRequest.getInterfaceName());
             throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, INTERFACE_NAME + ":" + rpcRequest.getInterfaceName());
         }
@@ -38,5 +35,4 @@ public class RpcMessageChecker {
             throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, INTERFACE_NAME + ":" + rpcRequest.getInterfaceName());
         }
     }
-
 }

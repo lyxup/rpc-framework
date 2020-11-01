@@ -10,7 +10,6 @@ import java.util.Map;
  * 单例工厂
  */
 public class SingletonFactory {
-
     private static Map<Class, Object> objectMap = new HashMap<>();
 
     private SingletonFactory() {}
@@ -18,7 +17,7 @@ public class SingletonFactory {
     public static <T> T getInstance(Class<T> clazz) {
         Object instance = objectMap.get(clazz);
         synchronized (clazz) {
-            if(instance == null) {
+            if (instance == null) {
                 try {
                     instance = clazz.newInstance();
                     objectMap.put(clazz, instance);
@@ -29,5 +28,4 @@ public class SingletonFactory {
         }
         return clazz.cast(instance);
     }
-
 }

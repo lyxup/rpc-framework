@@ -17,7 +17,6 @@ import java.util.jar.JarFile;
  * @data 2020/10/30 14:47
  */
 public class ReflectUtil {
-
     public static String getStackTrace() {
         StackTraceElement[] stack = new Throwable().getStackTrace();
         return stack[stack.length - 1].getClassName();
@@ -29,8 +28,7 @@ public class ReflectUtil {
         String packageDirName = packageName.replace('.', '/');
         Enumeration<URL> dirs;
         try {
-            dirs = Thread.currentThread().getContextClassLoader().getResources(
-                    packageDirName);
+            dirs = Thread.currentThread().getContextClassLoader().getResources(packageDirName);
             // 循环迭代下去
             while (dirs.hasMoreElements()) {
                 // 获取下一个元素
@@ -149,5 +147,4 @@ public class ReflectUtil {
             }
         }
     }
-
 }

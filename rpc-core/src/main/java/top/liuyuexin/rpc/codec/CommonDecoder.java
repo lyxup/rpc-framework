@@ -21,13 +21,11 @@ import java.util.List;
  * 通用解码拦截器
  */
 public class CommonDecoder extends ReplayingDecoder {
-
-    private static final Logger logger = LoggerFactory.getLogger(CommonDecoder
-    .class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonDecoder.class);
     private static final int MAGIC_NUMBER = 0xCAFEBABE;
 
     @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         int magic = in.readInt();
         if(magic != MAGIC_NUMBER) {
             logger.error("不识别的协议包: {}", magic);
@@ -35,9 +33,9 @@ public class CommonDecoder extends ReplayingDecoder {
         }
         int packageCode = in.readInt();
         Class<?> packageClass;
-        if(packageCode == PackageType.REQUEST_PACK.getCode()) {
+        if (packageCode == PackageType.REQUEST_PACK.getCode()) {
             packageClass = RpcRequest.class;
-        } else if(packageCode == PackageType.RESPONSE_PACK.getCode()) {
+        } else if (packageCode == PackageType.RESPONSE_PACK.getCode()) {
             packageClass = RpcResponse.class;
         } else {
             logger.error("不识别的数据包: {}", packageCode);
@@ -45,7 +43,7 @@ public class CommonDecoder extends ReplayingDecoder {
         }
         int serializerCode = in.readInt();
         CommonSerializer serializer = CommonSerializer.getByCode(serializerCode);
-        if(serializer == null) {
+        if (serializer == null) {
             logger.error("不识别的反序列化器: {}", serializerCode);
             throw new RpcException(RpcError.UNKNOWN_SERIALAZER);
         }
@@ -55,5 +53,4 @@ public class CommonDecoder extends ReplayingDecoder {
         Object obj = serializer.deserialize(bytes, packageClass);
         out.add(obj);
     }
-
 }

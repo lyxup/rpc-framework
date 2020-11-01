@@ -12,7 +12,6 @@ import java.io.OutputStream;
  * @data 2020/10/27 17:55
  */
 public class ObjectWriter {
-
     private static final int MAGIC_NUMBER = 0xCAFEBABE;
 
     public static void writeObject(OutputStream outputStream, Object object, CommonSerializer serializer) throws IOException {
@@ -28,7 +27,6 @@ public class ObjectWriter {
         outputStream.write(intToBytes(bytes.length));
         outputStream.write(bytes);
         outputStream.flush();
-
     }
 
     private static byte[] intToBytes(int value) {
@@ -39,5 +37,4 @@ public class ObjectWriter {
         src[3] = (byte) (value & 0xFF);
         return src;
     }
-
 }

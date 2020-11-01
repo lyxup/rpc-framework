@@ -40,6 +40,7 @@ public class SocketClient implements RpcClient {
     public SocketClient() {
         this(DEFAULT_SERIALIZER, new RandomLoadBalancer());
     }
+
     public SocketClient(LoadBalancer loadBalancer) {
         this(DEFAULT_SERIALIZER, loadBalancer);
     }
@@ -55,7 +56,7 @@ public class SocketClient implements RpcClient {
 
     @Override
     public Object sendRequest(RpcRequest rpcRequest) {
-        if(serializer == null) {
+        if (serializer == null) {
             logger.error("未设置序列化器");
             throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
         }
@@ -67,11 +68,11 @@ public class SocketClient implements RpcClient {
             ObjectWriter.writeObject(outputStream, rpcRequest, serializer);
             Object obj = ObjectReader.readObject(inputStream);
             RpcResponse rpcResponse = (RpcResponse) obj;
-            if(rpcResponse == null) {
+            if (rpcResponse == null) {
                 logger.error("服务调用失败，service：{}", rpcRequest.getInterfaceName());
                 throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, " service:" + rpcRequest.getInterfaceName());
             }
-            if(rpcResponse.getStatusCode() == null || rpcResponse.getStatusCode() != ResponseCode.SUCCESS.getCode()) {
+            if (rpcResponse.getStatusCode() == null || rpcResponse.getStatusCode() != ResponseCode.SUCCESS.getCode()) {
                 logger.error("调用服务失败, service: {}, response:{}", rpcRequest.getInterfaceName(), rpcResponse);
                 throw new RpcException(RpcError.SERVICE_INVOCATION_FAILURE, " service:" + rpcRequest.getInterfaceName());
             }
@@ -82,6 +83,5 @@ public class SocketClient implements RpcClient {
             throw new RpcException("服务调用失败: ", e);
         }
     }
-
 }
 

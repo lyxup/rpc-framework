@@ -54,18 +54,16 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
         ctx.close();
     }
 
-        @Override
-        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-            if (evt instanceof IdleStateEvent) {
-                IdleState state = ((IdleStateEvent) evt).state();
-                if (state == IdleState.READER_IDLE) {
-                    logger.info("长时间未收到心跳包，断开连接...");
-                    ctx.close();
-                }
-            } else {
-                super.userEventTriggered(ctx, evt);
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        if (evt instanceof IdleStateEvent) {
+            IdleState state = ((IdleStateEvent) evt).state();
+            if (state == IdleState.READER_IDLE) {
+                logger.info("长时间未收到心跳包，断开连接...");
+                ctx.close();
             }
+        } else {
+            super.userEventTriggered(ctx, evt);
         }
-
-
     }
+}

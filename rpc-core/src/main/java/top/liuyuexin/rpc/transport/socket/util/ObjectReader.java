@@ -19,7 +19,6 @@ import java.io.InputStream;
  * Socket方式从输入流中读取字节并反序列化
  */
 public class ObjectReader {
-
     private static final Logger logger = LoggerFactory.getLogger(ObjectReader.class);
     private static final int MAGIC_NUMBER = 0xCAFEBABE;
 
@@ -64,5 +63,4 @@ public class ObjectReader {
                 |(src[3] & 0xFF);
         return value;
     }
-
 }

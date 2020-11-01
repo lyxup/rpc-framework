@@ -17,8 +17,7 @@ import java.io.IOException;
  *
  * 基于Hessian协议的序列化器
  */
-public class HessianSerializer implements CommonSerializer{
-
+public class HessianSerializer implements CommonSerializer {
     private static final Logger logger = LoggerFactory.getLogger(HessianSerializer.class);
 
     @Override
@@ -60,5 +59,4 @@ public class HessianSerializer implements CommonSerializer{
     public int getCode() {
         return SerializerCode.valueOf("HESSIAN").getCode();
     }
-
 }

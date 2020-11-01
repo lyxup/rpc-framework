@@ -13,8 +13,7 @@ import java.io.IOException;
  * @Author LiuYueXin
  * @data 2020/9/18 17:26
  */
-public class JsonSerializer implements CommonSerializer{
-
+public class JsonSerializer implements CommonSerializer {
     private static final Logger logger = LoggerFactory.getLogger(JsonSerializer.class);
 
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -34,7 +33,7 @@ public class JsonSerializer implements CommonSerializer{
     public Object deserialize(byte[] bytes, Class<?> clazz) {
         try {
             Object obj = objectMapper.readValue(bytes, clazz);
-            if(obj instanceof RpcRequest) {
+            if (obj instanceof RpcRequest) {
                 obj = handleRequest(obj);
             }
             return obj;
@@ -45,7 +44,7 @@ public class JsonSerializer implements CommonSerializer{
         }
     }
 
-    /*
+    /**
         这里由于使用JSON序列化和反序列化Object数组，无法保证反序列化后仍然为原实例类型
         需要重新判断处理
      */
@@ -65,5 +64,4 @@ public class JsonSerializer implements CommonSerializer{
     public int getCode() {
         return SerializerCode.valueOf("JSON").getCode();
     }
-
 }

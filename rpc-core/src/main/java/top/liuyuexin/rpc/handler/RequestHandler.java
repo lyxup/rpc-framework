@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
  * 进行过程调用的处理器
  */
 public class RequestHandler {
-
     private static final Logger logger = LoggerFactory.getLogger(RequestHandler.class);
     private static final ServiceProvider serviceProvider;
 
@@ -42,6 +41,4 @@ public class RequestHandler {
         }
         return result;
     }
-
-
 }

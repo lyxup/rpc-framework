@@ -28,7 +28,6 @@ import java.util.concurrent.CompletableFuture;
  * NIO方式消费侧客户端类
  */
 public class NettyClient implements RpcClient {
-
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
 
     private static final EventLoopGroup group;
@@ -49,6 +48,7 @@ public class NettyClient implements RpcClient {
     public NettyClient(){
         this(DEFAULT_SERIALIZER, new RandomLoadBalancer());
     }
+
     public NettyClient(LoadBalancer loadBalancer) {
         this(DEFAULT_SERIALIZER, loadBalancer);
     }
@@ -56,6 +56,7 @@ public class NettyClient implements RpcClient {
     public NettyClient(Integer serializer) {
         this(serializer, new RandomLoadBalancer());
     }
+
     public NettyClient(Integer serializer, LoadBalancer loadBalancer) {
         this.serviceDiscovery = new NacosServiceDiscovery(loadBalancer);
         this.serializer = CommonSerializer.getByCode(serializer);
@@ -93,5 +94,4 @@ public class NettyClient implements RpcClient {
         }
         return resultFuture;
     }
-
 }

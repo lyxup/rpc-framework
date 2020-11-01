@@ -9,7 +9,5 @@ import java.util.List;
  * @data 2020/10/30 14:10
  */
 public interface LoadBalancer {
-
     Instance select(List<Instance> instances);
-
 }

@@ -14,7 +14,6 @@ import top.liuyuexin.rpc.transport.socket.client.SocketClient;
  * 测试消费者（客户端）
  */
 public class SocketTestClient {
-
     public static void main(String[] args) {
         SocketClient client = new SocketClient(CommonSerializer.KRYO_SERIALIZER);
         RpcClientProxy proxy = new RpcClientProxy(client);
@@ -25,5 +24,4 @@ public class SocketTestClient {
         ByeService byeService = proxy.getProxy(ByeService.class);
         System.out.println(byeService.bye("Netty"));
     }
-
 }
