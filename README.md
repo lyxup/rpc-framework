@@ -55,9 +55,7 @@ RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法
 package top.liuyuexin.rpc.api;
 
 public interface HelloService {
-
     String hello(HelloObject object);
-
 }
 ```
 
@@ -72,12 +70,10 @@ import top.liuyuexin.rpc.transport.netty.server.NettyServer;
 
 @ServiceScan
 public class NettyTestServer {
-
     public static void main(String[] args) {
         RpcServer server = new NettyServer("127.0.0.1", 9999, CommonSerializer.PROTOBUF_SERIALIZER);
         server.start();
     }
-
 }
 ```
 
@@ -95,7 +91,6 @@ import top.liuyuexin.rpc.transport.netty.client.NettyClient;
 
 
 public class NettyTestClient {
-
     public static void main(String[] args) {
         RpcClient client = new NettyClient(CommonSerializer.KRYO_SERIALIZER, new RoundRobinLoadBalancer());
         RpcClientProxy rpcClientProxy = new RpcClientProxy(client);
@@ -103,7 +98,6 @@ public class NettyTestClient {
         String res = helloService.hello("Hello!World!");
         System.out.println(res);
     }
-
 }
 ```
 
