@@ -16,7 +16,7 @@ RPC(Remote Procedure Call)框架可以让客户端直接调用服务端的方法
 - 实现了四种序列化算法，Json 方式、Kryo 算法、Hessian 算法与 Google Protobuf 方式（默认采用 Kryo方式序列化）
 - 实现了两种负载均衡算法：随机算法与轮转算法
 - 使用 Nacos 作为注册中心，管理服务提供者信息
-消费端如采用 Netty 方式，会复用 Channel 避免多次连接
+- 消费端如采用 Netty 方式，会复用 Channel 避免多次连接
 - 如消费端和提供者都采用 Netty 方式，会采用 Netty 的心跳机制，保证连接
 - 实现自定义的通信协议
 - 服务提供侧自动注册服务
